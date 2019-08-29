@@ -1,0 +1,66 @@
+{
+  "name": "flowlity-data-visualization",
+  "version": "1.0.0",
+  "main": "src/server.ts",
+  "repository": "https://gitlab.com/linkedin-plugin-aizimov/api-template-v2",
+  "author": "Juncheng <juncheng.zhou@aizimov.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prod": "cross-env NODE_ENV=prod ts-node .",
+    "start": "cross-env NODE_ENV=dev nodemon . --exec ts-node . -e ts,graphql",
+    "test": "cross-env NODE_ENV=test jest",
+    "eslint": "eslint 'src/**' --fix",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n exampleRefactory"
+  },
+  "lint-staged": {
+    "src/**": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@koa/cors": "^3.0.0",
+    "apollo-server-koa": "^2.6.7",
+    "class-validator": "^0.9.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "graphql": "^14.3.1",
+    "jest": "^24.8.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "pg": "^7.11.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.3.0",
+    "dotenv": "^8.0.0",
+    "typeorm": "^0.2.18",
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/graphql": "^14.2.1",
+    "@types/jest": "^24.0.15",
+    "@types/koa": "^2.0.48",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa__cors": "^2.2.3",
+    "@types/node": "^12.0.8",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "eslint-config-google": "^0.13.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^2.4.1",
+    "jest-transform-stub": "^2.0.0",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2",
+    "nodemon": "^1.19.1",
+    "ts-jest": "^24.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn test"
+    }
+  }
+}

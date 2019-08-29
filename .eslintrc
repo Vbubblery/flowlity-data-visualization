@@ -1,0 +1,25 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "google", "prettier"],
+  "plugins": ["prettier","@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars":"off",
+    "no-console": "warn",
+    "require-jsdoc":"off",
+    "new-cap":"off"  
+  }
+}

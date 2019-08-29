@@ -1,0 +1,53 @@
+require('dotenv').config();
+module.exports = [
+  {
+    name: 'test',
+    type: 'postgres',
+    host: process.env.TEST_DB_HOST,
+    port: process.env.TEST_DB_PORT,
+    username: process.env.TEST_DB_USERNAME,
+    password: process.env.TEST_DB_PASSWORD,
+    database: process.env.TEST_DB_NAME,
+    synchronize: true,
+    logging: false,
+    useNewUrlParser: true,
+    entities: ['./src/orm/entities/*.ts'],
+    cli: {
+      entitiesDir: './src/orm/entities',
+    },
+  },
+  {
+    name: 'dev',
+    type: 'postgres',
+    host: process.env.DEV_DB_HOST,
+    port: process.env.DEV_DB_PORT,
+    username: process.env.DEV_DB_USERNAME,
+    password: process.env.DEV_DB_PASSWORD,
+    database: process.env.DEV_DB_NAME,
+    synchronize: true,
+    logging: false,
+    useNewUrlParser: true,
+    entities: ['./src/orm/entities/*.ts'],
+    cli: {
+      entitiesDir: './src/orm/entities',
+    },
+  },
+  {
+    name: 'prod',
+    type: 'postgres',
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    synchronize: false,
+    logging: false,
+    useNewUrlParser: true,
+    entities: ['./src/orm/entities/*.ts'],
+    migrations: ['./src/orm/migrations/*.ts'],
+    cli: {
+      entitiesDir: './src/orm/entities',
+      migrationsDir: './src/orm/migrations',
+    },
+  },
+];
