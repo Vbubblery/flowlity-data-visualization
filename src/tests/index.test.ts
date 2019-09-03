@@ -10,13 +10,13 @@ import { deleteProductGraphqlTest } from "./graphql/product/delete";
 
 // merged 1
 describe("sequentially run tests", () => {
-  // createProduct();
-  // readProduct();
-  // updateProduct();
-  // deleteProduct();
-  // readConditionalProduct();
-  // createProductGraphqlTest();
-  // updateProductGraphqlTest();
-  // readProductGraphqlTest();
+  createProduct();
+  readProduct();
+  updateProduct();
+  deleteProduct();
+  readConditionalProduct();
+  createProductGraphqlTest();
+  updateProductGraphqlTest();
+  readProductGraphqlTest();
   deleteProductGraphqlTest();
 });
