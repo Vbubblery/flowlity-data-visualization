@@ -1,0 +1,20 @@
+{
+    "bubble2": {
+        "productId": "b1948b39-b021-4e77-8119-ae6bb13892cf",
+        "productName": "bubble2",
+        "date": 1567522650376,
+        "inventoryLevel": 1
+    },
+    "bubble3": {
+        "productId": "8725bcfb-89b0-4c2d-926c-a3f6a478a985",
+        "productName": "bubble3",
+        "date": 1567522650377,
+        "inventoryLevel": 1
+    },
+    "bubble": {
+        "productId": "ea9484e7-eb96-4cd9-92bd-53153222708e",
+        "productName": "bubble",
+        "date": 1567522050377,
+        "inventoryLevel": 1
+    }
+}

@@ -1,5 +1,11 @@
-import {createExampleParse} from './example';
+import {
+  createProductParse,
+  updateProductParse,
+  deleteProductParse
+} from "./product";
 
 export default {
-  createExampleParse,
+  createProductParse,
+  updateProductParse,
+  deleteProductParse
 };

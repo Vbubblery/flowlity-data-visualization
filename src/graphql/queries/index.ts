@@ -1,4 +1,5 @@
-import {examples} from './example';
+import { products, product } from "./product";
 export default {
-  examples,
+  products,
+  product
 };

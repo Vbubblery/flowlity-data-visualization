@@ -1,10 +1,10 @@
-import {GraphQLObjectType} from 'graphql';
+import { GraphQLObjectType } from "graphql";
 
-import {responseFragment} from '../fragments/response';
+import { responseFragment } from "../fragments/response";
 
 export const responseType = new GraphQLObjectType({
-  name: 'response',
+  name: "response",
   fields: {
-    ...responseFragment,
-  },
+    ...responseFragment
+  }
 });
