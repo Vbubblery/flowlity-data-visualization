@@ -6,6 +6,7 @@ import { readConditionalProduct } from "./model/filter";
 import { createProductGraphqlTest } from "./graphql/product/create";
 import { updateProductGraphqlTest } from "./graphql/product/update";
 import { readProductGraphqlTest } from "./graphql/product/read";
+import { deleteProductGraphqlTest } from "./graphql/product/delete";
 
 // merged 1
 describe("sequentially run tests", () => {
@@ -16,5 +17,6 @@ describe("sequentially run tests", () => {
   // readConditionalProduct();
   // createProductGraphqlTest();
   // updateProductGraphqlTest();
-  readProductGraphqlTest();
+  // readProductGraphqlTest();
+  deleteProductGraphqlTest();
 });
