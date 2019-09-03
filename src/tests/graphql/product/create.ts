@@ -110,8 +110,6 @@ export const createProductGraphqlTest = () =>
       `;
 
       const response = <any>await graphql(schema, mutation);
-      console.log(response);
-
       expect(response.data.createProductParse.status).toBe(`Failed`);
     });
   });
