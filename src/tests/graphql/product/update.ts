@@ -14,68 +14,97 @@ export const updateProductGraphqlTest = () =>
 
     test("update a product with correct infos", async () => {
       const mutation = `
-        mutation {
-          createProductParse(
-            productInput: {
-              productName: "bubble"
-              date: 1567543553562
-              inventoryLevel: 1
-            }
-          ) {
-            status
-            errors
-            product {
-              productId
-              productName
+      mutation {
+        createProductParse(
+          productInput: {
+            productName: "bubble"
+          }
+        ) {
+          status
+          errors
+          product {
+            productId
+            productName
+            data{
               date
               inventoryLevel
             }
           }
         }
+      }
+      
       `;
 
       await graphql(schema, mutation);
+      const addMutation = `
+        mutation{
+          addDataParse(
+            productName:"bubble"
+            dataInput:{
+              date:1567695412873,
+              inventoryLevel:0
+          }){
+            status
+            errors
+          }
+        }
+      `;
+      await graphql(schema, addMutation);
       const updateMutation = `mutation {
-        updateProductParse(
+        updateProductDataParse(
           productName: "bubble"
-          productUpdateInput: { inventoryLevel: 4 }
+          productUpdateInput: { date:1567695412873 inventoryLevel: 4 }
         ) {
           status
+          errors
           product {
-            inventoryLevel
+            data{
+              date
+              inventoryLevel
+            }
           }
         }
       }
       `;
       const response = <any>await graphql(schema, updateMutation);
-      expect(response.data.updateProductParse.status).toBe(`Successful`);
-      expect(response.data.updateProductParse.product.inventoryLevel).toBe(4);
+      expect(response.data.updateProductDataParse.status).toBe(`Successful`);
+      expect(
+        response.data.updateProductDataParse.product.data[0].inventoryLevel
+      ).toBe(4);
     });
     test("update a product with incorrect infos:out of range", async () => {
       const updateMutation = `mutation {
-        updateProductParse(
+        updateProductDataParse(
           productName: "bubble"
-          productUpdateInput: { inventoryLevel: 14 }
+          productUpdateInput: { date:1567695412873 inventoryLevel: 22 }
         ) {
           status
+          errors
           product {
-            inventoryLevel
+            data{
+              date
+              inventoryLevel
+            }
           }
         }
       }
       `;
       const response = <any>await graphql(schema, updateMutation);
-      expect(response.data.updateProductParse.status).toBe(`Failed`);
+      expect(response.data.updateProductDataParse.status).toBe(`Failed`);
     });
     test("update a product with incorrect infos: is string", async () => {
       const updateMutation = `mutation {
-        updateProductParse(
+        updateProductDataParse(
           productName: "bubble"
-          productUpdateInput: { inventoryLevel: "14" }
+          productUpdateInput: { date:1567695412873 inventoryLevel: "2" }
         ) {
           status
+          errors
           product {
-            inventoryLevel
+            data{
+              date
+              inventoryLevel
+            }
           }
         }
       }
@@ -85,18 +114,22 @@ export const updateProductGraphqlTest = () =>
     });
     test("update a product with incorrect infos: name is wrong", async () => {
       const updateMutation = `mutation {
-        updateProductParse(
-          productName: "bubble23"
-          productUpdateInput: { inventoryLevel: 4 }
+        updateProductDataParse(
+          productName: "bubble321"
+          productUpdateInput: { date:1567695412873 inventoryLevel: 1 }
         ) {
           status
+          errors
           product {
-            inventoryLevel
+            data{
+              date
+              inventoryLevel
+            }
           }
         }
       }
       `;
       const response = <any>await graphql(schema, updateMutation);
-      expect(response.data.updateProductParse.status).toBe(`Failed`);
+      expect(response.data.updateProductDataParse.status).toBe(`Failed`);
     });
   });

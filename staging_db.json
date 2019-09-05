@@ -1,8 +1,34 @@
 {
     "bubble": {
-        "productId": "ea9484e7-eb96-4cd9-92bd-53153222708e",
+        "productId": "1c400142-2d4a-4b84-9885-7aef8b262fa0",
         "productName": "bubble",
-        "date": 1567522050377,
-        "inventoryLevel": 4
+        "data": [
+            {
+                "date": 1567695422883,
+                "inventoryLevel": 4
+            },
+            {
+                "date": 1567695412873,
+                "inventoryLevel": 2
+            },
+            {
+                "date": 1567695412883,
+                "inventoryLevel": 2
+            }
+        ]
+    },
+    "bubble2": {
+        "productId": "147fae6d-1ae9-497b-89d0-de87b6344a4b",
+        "productName": "bubble2",
+        "data": [
+            {
+                "date": 1567695422883,
+                "inventoryLevel": 3
+            },
+            {
+                "date": 1567695422884,
+                "inventoryLevel": 3
+            }
+        ]
     }
 }

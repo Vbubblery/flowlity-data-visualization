@@ -8,18 +8,13 @@ export const updateProduct = () =>
       await new Product({
         productId: "2b01dbe3-4b0b-4baf-8ed5-58e818a0a8ed",
         productName: "test",
-        date: +new Date(),
-        inventoryLevel: 1
+        data: [{ date: 1567643690772, inventoryLevel: 2 }]
       }).save();
       await new Product({
-        productName: "test2",
-        date: +new Date(),
-        inventoryLevel: 2
+        productName: "test2"
       }).save();
       await new Product({
-        productName: "test3",
-        date: +new Date(),
-        inventoryLevel: 3
+        productName: "test3"
       }).save();
     });
     afterAll(async () => {
@@ -29,18 +24,9 @@ export const updateProduct = () =>
 
     test(`update a exist Product`, async () => {
       let product: Product = await Product.getByName("test");
-      const d = product.date;
-      await product.update({ inventoryLevel: 5 });
+      await product.updateData({ date: 1567643690772, inventoryLevel: 5 });
       product = await Product.getByName("test");
-      expect(product.inventoryLevel).toBe(5);
-      expect(product.date).toBe(d);
-    });
-
-    test(`update an un-exist Product`, async () => {
-      const product: Product = await Product.getByName("test2");
-      product.productName = "test323232";
-      await expect(product.update({ inventoryLevel: 2 })).rejects.toThrow(
-        `Can't find dataPath: /test323232. Stopped at test323232`
-      );
+      expect(product.data[0].inventoryLevel).toBe(5);
+      expect(product.data[0].date).toBe(1567643690772);
     });
   });

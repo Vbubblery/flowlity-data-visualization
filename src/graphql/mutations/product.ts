@@ -1,8 +1,13 @@
-import { ProductInput, ProductUpdateInput } from "../types/mutations/product";
+import {
+  ProductInput,
+  ProductDataUpdateInput,
+  ProductDataAddInput
+} from "../types/mutations/product";
 import {
   createProductResolver,
   updateProductResolver,
-  deleteProductResolver
+  deleteProductResolver,
+  addDataResolver
 } from "../resolvers/product";
 import { responseType } from "../types/queries/response";
 import { GraphQLNonNull, GraphQLString } from "graphql";
@@ -17,7 +22,23 @@ export const createProductParse = {
   resolve: createProductResolver
 };
 
-export const updateProductParse = {
+export const addDataParse = {
+  type: responseType,
+  args: {
+    productId: {
+      type: GraphQLString
+    },
+    productName: {
+      type: GraphQLString
+    },
+    dataInput: {
+      type: GraphQLNonNull(ProductDataAddInput)
+    }
+  },
+  resolve: addDataResolver
+};
+
+export const updateProductDataParse = {
   type: responseType,
   args: {
     productId: {
@@ -27,7 +48,7 @@ export const updateProductParse = {
       type: GraphQLString
     },
     productUpdateInput: {
-      type: GraphQLNonNull(ProductUpdateInput)
+      type: GraphQLNonNull(ProductDataUpdateInput)
     }
   },
   resolve: updateProductResolver

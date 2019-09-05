@@ -19,12 +19,6 @@ export const products = {
   args: {
     head: {
       type: GraphQLInt
-    },
-    sortBy: {
-      type: SortNameEnumType
-    },
-    method: {
-      type: SortMethodEnumType
     }
   },
   resolve: getAllProductsResolver
@@ -34,7 +28,16 @@ export const product = {
   type: ProductType,
   args: {
     productId: {
-      type: GraphQLNonNull(GraphQLString)
+      type: GraphQLString
+    },
+    productName: {
+      type: GraphQLString
+    },
+    sortBy: {
+      type: SortNameEnumType
+    },
+    method: {
+      type: SortMethodEnumType
     }
   },
   resolve: getProductResolver

@@ -1,10 +1,10 @@
 import {
   GraphQLNonNull,
   GraphQLString,
-  GraphQLInt,
-  GraphQLFloat,
-  GraphQLEnumType
+  GraphQLEnumType,
+  GraphQLList
 } from "graphql";
+import { DataType } from "../queries/data";
 
 export const SortNameEnumType = new GraphQLEnumType({
   name: "SortNameEnumType",
@@ -36,11 +36,5 @@ export const ProductFragment = {
   },
   productName: {
     type: GraphQLNonNull(GraphQLString)
-  },
-  date: {
-    type: GraphQLNonNull(GraphQLFloat)
-  },
-  inventoryLevel: {
-    type: GraphQLNonNull(GraphQLInt)
   }
 };

@@ -18,8 +18,6 @@ export const createProductGraphqlTest = () =>
           createProductParse(
             productInput: {
               productName: "bubble"
-              date: 1567543553562
-              inventoryLevel: 1
             }
           ) {
             status
@@ -27,8 +25,10 @@ export const createProductGraphqlTest = () =>
             product {
               productId
               productName
-              date
-              inventoryLevel
+              data{
+                date
+                inventoryLevel
+              }
             }
           }
         }
@@ -39,77 +39,64 @@ export const createProductGraphqlTest = () =>
     });
     test("create new product with incorrect infos: name is empty", async () => {
       const mutation = `
-        mutation {
-          createProductParse(
-            productInput: {
-              productName: ""
-              date: 1567543553562
-              inventoryLevel: 1
-            }
-          ) {
-            status
-            errors
-            product {
-              productId
-              productName
+      mutation {
+        createProductParse(
+          productInput: {
+            productName: ""
+          }
+        ) {
+          status
+          errors
+          product {
+            productId
+            productName
+            data{
               date
               inventoryLevel
             }
           }
         }
+      }
+      
       `;
 
       const response = <any>await graphql(schema, mutation);
       expect(response.data.createProductParse.status).toBe(`Failed`);
     });
-    test("create new product with incorrect infos: date is failed", async () => {
+    test("add a new data to product: date is failed", async () => {
       const mutation = `
-        mutation {
-          createProductParse(
-            productInput: {
-              productName: ""
-              date: 156754355356223
-              inventoryLevel: 1
-            }
-          ) {
-            status
-            errors
-            product {
-              productId
-              productName
-              date
-              inventoryLevel
-            }
-          }
+      mutation{
+        addDataParse(
+          productName:"bubble"
+          dataInput:{
+          date:21,
+          inventoryLevel:3
+        }){
+          status
+          errors
         }
+      }
       `;
 
       const response = <any>await graphql(schema, mutation);
-      expect(response.data.createProductParse.status).toBe(`Failed`);
+      expect(response.data.addDataParse.status).toBe(`Failed`);
     });
-    test("create new product with incorrect infos: inventoryLevel", async () => {
+    test("add a new data to product: inventoryLevel", async () => {
       const mutation = `
-        mutation {
-          createProductParse(
-            productInput: {
-              productName: ""
-              date: 1567543553562
-              inventoryLevel: 11
-            }
-          ) {
-            status
-            errors
-            product {
-              productId
-              productName
-              date
-              inventoryLevel
-            }
-          }
+      mutation{
+        addDataParse(
+          productName:"bubble"
+          dataInput:{
+          date:1567695422884,
+          inventoryLevel:31
+        }){
+          status
+          errors
         }
+      }
       `;
 
       const response = <any>await graphql(schema, mutation);
-      expect(response.data.createProductParse.status).toBe(`Failed`);
+      expect(response.data.addDataParse.status).toBe(`Failed`);
     });
   });

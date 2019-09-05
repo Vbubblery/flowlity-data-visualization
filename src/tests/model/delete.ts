@@ -8,19 +8,13 @@ export const deleteProduct = () =>
 
       await new Product({
         productId: "2b01dbe3-4b0b-4baf-8ed5-58e818a0a8ed",
-        productName: "test",
-        date: +new Date(),
-        inventoryLevel: 1
+        productName: "test"
       }).save();
       await new Product({
-        productName: "test2",
-        date: +new Date(),
-        inventoryLevel: 2
+        productName: "test2"
       }).save();
       await new Product({
-        productName: "test3",
-        date: +new Date(),
-        inventoryLevel: 3
+        productName: "test3"
       }).save();
     });
     afterAll(async () => {

@@ -1,26 +1,12 @@
 import { jGetAll, jUpdate, jDelete } from "./../config/index";
-import {
-  IsNotEmpty,
-  IsString,
-  IsNumber,
-  IsIn,
-  IsOptional,
-  validate,
-  Min,
-  Max
-} from "class-validator";
+import { IsNotEmpty, IsString, IsOptional, validate } from "class-validator";
 import { jSave, jGetByKey } from "../config";
+import { Data, DataObject } from "./data";
 
 export interface ProductObject {
   productId?: string;
   productName: string;
-  date: number;
-  inventoryLevel: number;
-}
-
-export interface ProductUpdateObject {
-  date?: number;
-  inventoryLevel?: number;
+  data?: Data[];
 }
 
 export enum sortName {
@@ -42,8 +28,7 @@ export class Product {
   constructor(params: ProductObject) {
     this.productId = params.productId || undefined;
     this.productName = params.productName;
-    this.date = params.date;
-    this.inventoryLevel = params.inventoryLevel;
+    this.data = params.data || [];
   }
 
   async save() {
@@ -51,37 +36,59 @@ export class Product {
     if (errs.length !== 0) throw new Error("Check your input");
     return jSave(this);
   }
-
-  async update(params: ProductUpdateObject) {
-    const newProduct = new Product({ ...this, ...params });
-    const errs = await validate(newProduct);
+  async addNewData(params: DataObject) {
+    // todo
+    if (this.data.find(i => i.date === params.date))
+      throw new Error("date duplicated.");
+    const data = new Data(params);
+    const errs = await validate(data);
     if (errs.length !== 0) throw new Error("Check your input");
-    return jUpdate(newProduct);
+    this.data.push(data);
+    return jUpdate(this);
+  }
+
+  async updateData(params: DataObject) {
+    const data = new Data(params);
+    const errs = await validate(data);
+    if (errs.length !== 0) throw new Error("Check your input");
+    const index = this.data.findIndex(i => i.date === data.date);
+    this.data[index] = data;
+    return jUpdate(this);
   }
 
   delete() {
     return jDelete(this.productName);
   }
 
-  static async getAll(sort?: SortObject) {
+  // static async getAll(sort?: SortObject) {
+  static async getAll(head?: number) {
+    if (head === 0) return [];
     let result = await jGetAll();
-    if (sort && sort.method === "ASC") {
-      result = result.sort((a: any, b: any) => a[sort.sortBy] - b[sort.sortBy]);
-    }
-    if (sort && sort.method === "DESC") {
-      result = result.sort((a: any, b: any) => b[sort.sortBy] - a[sort.sortBy]);
-    }
+    // if (sort && sort.method === "ASC") {
+    //   result = result.sort((a: any, b: any) => a.data[sort.sortBy] - b.data[sort.sortBy]);
+    // }
+    // if (sort && sort.method === "DESC") {
+    //   result = result.sort((a: any, b: any) => b.data[sort.sortBy] - a.data[sort.sortBy]);
+    // }
+    if (head) result = result.slice(0, head);
     return result;
   }
-
-  static async filter() {
-    return await jGetAll();
+  dataSort(sort: SortObject) {
+    if (sort && sort.method === "ASC") {
+      this.data = this.data.sort(
+        (a: any, b: any) => a[sort.sortBy] - b[sort.sortBy]
+      );
+    }
+    if (sort && sort.method === "DESC") {
+      this.data = this.data.sort(
+        (a: any, b: any) => b[sort.sortBy] - a[sort.sortBy]
+      );
+    }
+    return this;
   }
-
-  static async head(value: number) {
-    return (await this.getAll()).slice(0, value);
-  }
-
+  // static async dataHead(value: number,productName: string) {
+  //   return (await this.getByName(productName)).data.slice(0, value);
+  // }
   static getByName(productName: string) {
     return jGetByKey(productName);
   }
@@ -101,15 +108,5 @@ export class Product {
   @IsString()
   public productName!: string;
 
-  // timestamp
-  @IsNotEmpty()
-  @Min(1000000000000)
-  @Max(+new Date() + 86400000)
-  @IsNumber()
-  public date!: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @IsIn([0, 1, 2, 3, 4, 5])
-  public inventoryLevel!: number;
+  public data: Data[];
 }

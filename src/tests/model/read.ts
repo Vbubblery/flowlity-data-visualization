@@ -5,22 +5,15 @@ export const readProduct = () =>
   describe("Test: Create a Product", () => {
     beforeAll(async () => {
       init("test_db");
-
       await new Product({
         productId: "2b01dbe3-4b0b-4baf-8ed5-58e818a0a8ed",
-        productName: "test",
-        date: +new Date(),
-        inventoryLevel: 1
+        productName: "test"
       }).save();
       await new Product({
-        productName: "test2",
-        date: +new Date(),
-        inventoryLevel: 2
+        productName: "test2"
       }).save();
       await new Product({
-        productName: "test3",
-        date: +new Date(),
-        inventoryLevel: 3
+        productName: "test3"
       }).save();
     });
     afterAll(async () => {
@@ -36,7 +29,6 @@ export const readProduct = () =>
     test(`Read a Product from DB by product name`, async () => {
       const product = await Product.getByName("test");
       expect(product.productName).toBe("test");
-      expect(product.inventoryLevel).toBe(1);
     });
 
     test(`Read an un-exist Product from DB by product name`, async () => {
@@ -50,7 +42,6 @@ export const readProduct = () =>
         "2b01dbe3-4b0b-4baf-8ed5-58e818a0a8ed"
       );
       expect(product.productName).toBe("test");
-      expect(product.inventoryLevel).toBe(1);
     });
     test(`Read an un-exist from DB by product id`, async () => {
       await expect(

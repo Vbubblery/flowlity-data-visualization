@@ -1,11 +1,13 @@
 import {
   createProductParse,
-  updateProductParse,
-  deleteProductParse
+  updateProductDataParse,
+  deleteProductParse,
+  addDataParse
 } from "./product";
 
 export default {
   createProductParse,
-  updateProductParse,
-  deleteProductParse
+  updateProductDataParse,
+  deleteProductParse,
+  addDataParse
 };
