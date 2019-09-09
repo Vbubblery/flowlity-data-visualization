@@ -20,6 +20,34 @@ export const getProductResolver = async (__: any, args: any) => {
   return product;
 };
 
+export const ProductsFilterResolver = async (__: any, args: any) => {
+  // todo
+  const { names, dateStart, dateEnd } = args;
+  if (names === undefined) throw new Error("give names");
+  const result: any = [];
+  for (const i of names) {
+    const product: Product = await Product.getByName(i);
+    const productName = product.productName;
+    let data = product.data;
+    if (dateStart !== -1 && dateEnd === -1)
+      data = data.filter(d => d.date >= dateStart);
+    else if (dateStart === -1 && dateEnd !== -1)
+      data = data.filter(d => d.date <= dateEnd);
+    else if (dateStart !== -1 && dateEnd !== -1)
+      data = data.filter(d => d.date <= dateEnd && d.date >= dateStart);
+    data.forEach(d => {
+      const date = new Date(d.date).toLocaleString();
+      // const date = d.date;
+      const inventoryLevel = d.inventoryLevel;
+      result.push({
+        productName,
+        date,
+        inventoryLevel
+      });
+    });
+  }
+  return result;
+};
 // ---------------------------------------------------------
 // mutations:
 export const createProductResolver = async (__: any, args: any) => {

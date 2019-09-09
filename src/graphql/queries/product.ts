@@ -1,13 +1,15 @@
-import { ProductType } from "./../types/queries/product";
+import { ProductType, NewProductType } from "./../types/queries/product";
 import {
   GraphQLList,
   GraphQLString,
   GraphQLNonNull,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLFloat
 } from "graphql";
 import {
   getAllProductsResolver,
-  getProductResolver
+  getProductResolver,
+  ProductsFilterResolver
 } from "../resolvers/product";
 import {
   SortNameEnumType,
@@ -22,6 +24,22 @@ export const products = {
     }
   },
   resolve: getAllProductsResolver
+};
+
+export const ProductsFilter = {
+  type: new GraphQLList(NewProductType),
+  args: {
+    names: {
+      type: GraphQLNonNull(new GraphQLList(GraphQLString))
+    },
+    dateStart: {
+      type: GraphQLNonNull(GraphQLFloat)
+    },
+    dateEnd: {
+      type: GraphQLNonNull(GraphQLFloat)
+    }
+  },
+  resolve: ProductsFilterResolver
 };
 
 export const product = {

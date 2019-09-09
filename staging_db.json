@@ -1,33 +1,103 @@
 {
-    "bubble": {
+    "productA": {
         "productId": "1c400142-2d4a-4b84-9885-7aef8b262fa0",
-        "productName": "bubble",
+        "productName": "productA",
         "data": [
             {
-                "date": 1567695422883,
+                "date": 1567329105000,
+                "inventoryLevel": 2
+            },
+            {
+                "date": 1567415505000,
+                "inventoryLevel": 1
+            },
+            {
+                "date": 1567501905000,
+                "inventoryLevel": 5
+            },
+            {
+                "date": 1567588305000,
+                "inventoryLevel": 3
+            },
+            {
+                "date": 1567674705000,
+                "inventoryLevel": 2
+            },
+            {
+                "date": 1567761105000,
+                "inventoryLevel": 1
+            },
+            {
+                "date": 1567847505000,
                 "inventoryLevel": 4
-            },
-            {
-                "date": 1567695412873,
-                "inventoryLevel": 2
-            },
-            {
-                "date": 1567695412883,
-                "inventoryLevel": 2
             }
         ]
     },
-    "bubble2": {
+    "productB": {
         "productId": "147fae6d-1ae9-497b-89d0-de87b6344a4b",
-        "productName": "bubble2",
+        "productName": "productB",
         "data": [
             {
-                "date": 1567695422883,
+                "date": 1567329105000,
+                "inventoryLevel": 6
+            },
+            {
+                "date": 1567415505000,
+                "inventoryLevel": 1
+            },
+            {
+                "date": 1567501905000,
+                "inventoryLevel": 2
+            },
+            {
+                "date": 1567588305000,
+                "inventoryLevel": 5
+            },
+            {
+                "date": 1567674705000,
+                "inventoryLevel": 4
+            },
+            {
+                "date": 1567761105000,
                 "inventoryLevel": 3
             },
             {
-                "date": 1567695422884,
+                "date": 1567847505000,
+                "inventoryLevel": 1
+            }
+        ]
+    },
+    "productC": {
+        "productId": "147fae6d-1ae9-497b-8950-de87b6344a4b",
+        "productName": "productC",
+        "data": [
+            {
+                "date": 1567329105000,
+                "inventoryLevel": 1
+            },
+            {
+                "date": 1567415505000,
+                "inventoryLevel": 2
+            },
+            {
+                "date": 1567501905000,
                 "inventoryLevel": 3
+            },
+            {
+                "date": 1567588305000,
+                "inventoryLevel": 4
+            },
+            {
+                "date": 1567674705000,
+                "inventoryLevel": 5
+            },
+            {
+                "date": 1567761105000,
+                "inventoryLevel": 6
+            },
+            {
+                "date": 1567847505000,
+                "inventoryLevel": 6
             }
         ]
     }
