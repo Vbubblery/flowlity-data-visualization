@@ -4,10 +4,10 @@ import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLInt,
-  GraphQLString
+  GraphQLString,
+  GraphQLFloat
 } from "graphql";
 import { DataType } from "./data";
-import { DataFragment } from "../fragments/data";
 
 export const ProductType = new GraphQLObjectType({
   name: "ProductType",

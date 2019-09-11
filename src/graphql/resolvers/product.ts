@@ -1,4 +1,4 @@
-import { DataUpdateObject } from "./../../entities/data";
+import { DataUpdateObject, Data } from "./../../entities/data";
 import { Product, ProductObject } from "./../../entities/product";
 
 // queries:
@@ -38,6 +38,29 @@ export const ProductsFilterResolver = async (__: any, args: any) => {
     data.forEach(d => {
       const date = new Date(d.date).toLocaleString();
       // const date = d.date;
+      const inventoryLevel = d.inventoryLevel;
+      result.push({
+        productName,
+        date,
+        inventoryLevel
+      });
+    });
+  }
+  return result;
+};
+
+export const ProductsViewResolver = async (__: any, args: any) => {
+  // todo
+  const { names } = args;
+  if (names === undefined) throw new Error("give names");
+  const result: any = [];
+  for (const i of names) {
+    const product: Product = await Product.getByName(i);
+    const productName = product.productName;
+    const data = product.data;
+    data.forEach(d => {
+      // const date = new Date(d.date).toLocaleString();
+      const date = d.date;
       const inventoryLevel = d.inventoryLevel;
       result.push({
         productName,
@@ -107,6 +130,23 @@ export const deleteProductResolver = async (__: any, args: any) => {
         : await Product.getById(productId)
     );
     await product.delete();
+    return { status: 1 };
+  } catch (error) {
+    return { status: 0, errors: error.toString() };
+  }
+};
+
+export const deleteDataFromProductResolver = async (__: any, args: any) => {
+  try {
+    const { productId, productName, date } = args;
+    const product: Product = new Product(
+      productName
+        ? await Product.getByName(productName)
+        : await Product.getById(productId)
+    );
+    const index = product.data.findIndex((i: Data) => i.date === date);
+    product.data.splice(index, 1);
+    await product.update();
     return { status: 1 };
   } catch (error) {
     return { status: 0, errors: error.toString() };

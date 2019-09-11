@@ -36,6 +36,11 @@ export class Product {
     if (errs.length !== 0) throw new Error("Check your input");
     return jSave(this);
   }
+  async update() {
+    const errs = await validate(this);
+    if (errs.length !== 0) throw new Error("Check your input");
+    return jUpdate(this);
+  }
   async addNewData(params: DataObject) {
     // todo
     if (this.data.find(i => i.date === params.date))

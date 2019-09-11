@@ -7,10 +7,11 @@ import {
   createProductResolver,
   updateProductResolver,
   deleteProductResolver,
-  addDataResolver
+  addDataResolver,
+  deleteDataFromProductResolver
 } from "../resolvers/product";
 import { responseType } from "../types/queries/response";
-import { GraphQLNonNull, GraphQLString } from "graphql";
+import { GraphQLNonNull, GraphQLString, GraphQLFloat } from "graphql";
 
 export const createProductParse = {
   type: responseType,
@@ -65,4 +66,20 @@ export const deleteProductParse = {
     }
   },
   resolve: deleteProductResolver
+};
+
+export const deleteDataFromProductParse = {
+  type: responseType,
+  args: {
+    productId: {
+      type: GraphQLString
+    },
+    productName: {
+      type: GraphQLString
+    },
+    date: {
+      type: GraphQLFloat
+    }
+  },
+  resolve: deleteDataFromProductResolver
 };

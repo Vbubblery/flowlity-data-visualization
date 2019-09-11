@@ -9,7 +9,8 @@ import {
 import {
   getAllProductsResolver,
   getProductResolver,
-  ProductsFilterResolver
+  ProductsFilterResolver,
+  ProductsViewResolver
 } from "../resolvers/product";
 import {
   SortNameEnumType,
@@ -40,6 +41,16 @@ export const ProductsFilter = {
     }
   },
   resolve: ProductsFilterResolver
+};
+
+export const ProductsView = {
+  type: new GraphQLList(NewProductType),
+  args: {
+    names: {
+      type: GraphQLNonNull(new GraphQLList(GraphQLString))
+    }
+  },
+  resolve: ProductsViewResolver
 };
 
 export const product = {
