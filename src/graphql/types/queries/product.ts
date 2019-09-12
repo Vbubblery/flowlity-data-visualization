@@ -22,6 +22,9 @@ export const ProductType = new GraphQLObjectType({
 export const NewProductType = new GraphQLObjectType({
   name: "NewProductType",
   fields: {
+    productId: {
+      type: GraphQLNonNull(GraphQLString)
+    },
     productName: {
       type: GraphQLNonNull(GraphQLString)
     },

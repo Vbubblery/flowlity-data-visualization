@@ -16,6 +16,7 @@ import {
   SortNameEnumType,
   SortMethodEnumType
 } from "../types/fragments/product";
+import { FilterInput } from "../types/mutations/filter";
 
 export const products = {
   type: new GraphQLList(ProductType),
@@ -48,6 +49,9 @@ export const ProductsView = {
   args: {
     names: {
       type: GraphQLNonNull(new GraphQLList(GraphQLString))
+    },
+    filter: {
+      type: FilterInput
     }
   },
   resolve: ProductsViewResolver

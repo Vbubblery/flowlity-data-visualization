@@ -12,6 +12,10 @@
                 "inventoryLevel": 2
             },
             {
+                "date": 1567501905000,
+                "inventoryLevel": 5
+            },
+            {
                 "date": 1567588305000,
                 "inventoryLevel": 3
             },
@@ -26,14 +30,6 @@
             {
                 "date": 1567847505000,
                 "inventoryLevel": 4
-            },
-            {
-                "date": 1564974951864,
-                "inventoryLevel": 5
-            },
-            {
-                "date": 1565147863948,
-                "inventoryLevel": 4
             }
         ]
     },
@@ -43,7 +39,7 @@
         "data": [
             {
                 "date": 1567329105000,
-                "inventoryLevel": 6
+                "inventoryLevel": 3
             },
             {
                 "date": 1567415505000,
@@ -67,14 +63,6 @@
             },
             {
                 "date": 1567847505000,
-                "inventoryLevel": 1
-            },
-            {
-                "date": 1568088302570,
-                "inventoryLevel": 2
-            },
-            {
-                "date": 1567998879756,
                 "inventoryLevel": 1
             }
         ]
@@ -105,11 +93,11 @@
             },
             {
                 "date": 1567761105000,
-                "inventoryLevel": 6
+                "inventoryLevel": 2
             },
             {
                 "date": 1567847505000,
-                "inventoryLevel": 6
+                "inventoryLevel": 1
             }
         ]
     }

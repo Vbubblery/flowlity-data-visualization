@@ -51,24 +51,41 @@ export const ProductsFilterResolver = async (__: any, args: any) => {
 
 export const ProductsViewResolver = async (__: any, args: any) => {
   // todo
-  const { names } = args;
+  const { names, filter } = args;
   if (names === undefined) throw new Error("give names");
-  const result: any = [];
+  let result: any = [];
   for (const i of names) {
     const product: Product = await Product.getByName(i);
     const productName = product.productName;
+    const productId = product.productId;
     const data = product.data;
     data.forEach(d => {
       // const date = new Date(d.date).toLocaleString();
       const date = d.date;
       const inventoryLevel = d.inventoryLevel;
       result.push({
+        productId,
         productName,
         date,
         inventoryLevel
       });
     });
   }
+  // this part can opt later.
+  if (
+    filter.date &&
+    filter.date.dateStart &&
+    filter.date.dateEnd &&
+    filter.date.dateStart !== -1 &&
+    filter.date.dateEnd !== -1
+  )
+    result = result.filter((i: any) => {
+      return i.date >= filter.date.dateStart && i.date <= filter.date.dateEnd;
+    });
+  if (filter.level && filter.level !== -1)
+    result = result.filter((i: any) => {
+      return i.inventoryLevel === filter.level;
+    });
   return result;
 };
 // ---------------------------------------------------------
