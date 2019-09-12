@@ -37,6 +37,33 @@ export const createProductGraphqlTest = () =>
       const response = <any>await graphql(schema, mutation);
       expect(response.data.createProductParse.status).toBe(`Successful`);
     });
+
+    test("create new product with correct infos but duplicated name", async () => {
+      const mutation = `
+        mutation {
+          createProductParse(
+            productInput: {
+              productName: "bubble"
+            }
+          ) {
+            status
+            errors
+            product {
+              productId
+              productName
+              data{
+                date
+                inventoryLevel
+              }
+            }
+          }
+        }
+      `;
+
+      const response = <any>await graphql(schema, mutation);
+      expect(response.data.createProductParse.status).toBe(`Failed`);
+    });
+
     test("create new product with incorrect infos: name is empty", async () => {
       const mutation = `
       mutation {
@@ -63,7 +90,7 @@ export const createProductGraphqlTest = () =>
       const response = <any>await graphql(schema, mutation);
       expect(response.data.createProductParse.status).toBe(`Failed`);
     });
-    test("add a new data to product: date is failed", async () => {
+    test("add a new data to product: date is wrong", async () => {
       const mutation = `
       mutation{
         addDataParse(
@@ -81,7 +108,7 @@ export const createProductGraphqlTest = () =>
       const response = <any>await graphql(schema, mutation);
       expect(response.data.addDataParse.status).toBe(`Failed`);
     });
-    test("add a new data to product: inventoryLevel", async () => {
+    test("add a new data to product: inventoryLevel out of range", async () => {
       const mutation = `
       mutation{
         addDataParse(

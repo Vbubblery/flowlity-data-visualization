@@ -43,7 +43,6 @@ export const updateProduct = () =>
     });
     test(`update a exist Product with invalid data: date string`, async () => {
       const product: Product = await Product.getByName("test");
-
       expect(
         // @ts-ignore
         product.updateData({ date: "1567643690772", inventoryLevel: 2 })
